@@ -1,4 +1,4 @@
-This repository contains a simple implementation of some custom ParquetWriter/ParquetReader.
+This repository contains a simple implementation of a custom ParquetWriter/ParquetReader.
 
 - A parquet file is written by serializing strings by `CustomParquetWriter`.
 - `CustomParquetReader` deserializes the file into a case class.
