@@ -1,6 +1,6 @@
 package custom
 
-import custom.ParquetTools._
+import ParquetTools._
 import org.apache.hadoop.fs.Path
 import parquet.hadoop.ParquetReader
 
@@ -13,6 +13,8 @@ object CustomParquetReader extends App {
   // new ParquetReader(...) is deprecated, we must use the builder form
   def parquetReader(path: Path): ParquetReader[CustomString] = {
     ParquetReader.builder[CustomString](new CustomReadSupport, path).build()
+    // or we can use CustomFullReadSupport to read every fields
+    //ParquetReader.builder[CustomString](new CustomFullReadSupport, path).build()
   }
 
   val reader = parquetReader("/tmp/toto.parquet")
