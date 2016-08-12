@@ -42,9 +42,12 @@ class CustomReadSupport extends ReadSupport[CustomString] {
           current = CustomString("") // init, just for the demo
         }
         override def end(): Unit = {
+          // used when a leaf of a record was read (when there is a hierarchy in the parquet fields)
+          // normally, we must set the record read on the parent, eg. here something like:
+          // parentConverter.current.copy(value = s"${current.value} (( ${converter.result} ))")
         }
         def getCurrentRecord() = {
-          current.copy(converter.result)
+          current.copy(value = converter.result)
         }
       }
 
