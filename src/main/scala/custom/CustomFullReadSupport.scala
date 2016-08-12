@@ -66,7 +66,7 @@ class CustomFullReadSupport extends ReadSupport[CustomString] {
           // parentConverter.current.copy(value = s"${current.value} (( ${converter.result} ))")
         }
         def getCurrentRecord() = {
-          current.copy(value = converters.flatMap(c => Option(c.result).map(_.toString).orElse(Option("n/a"))).mkString(", "))
+          current.copy(value = converters.flatMap(c => Option(c.result).map(_.toString).orElse(Option("n/a"))).mkString("\"", "\" | \"", "\""))
         }
       }
 
