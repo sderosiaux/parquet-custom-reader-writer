@@ -25,26 +25,31 @@ class CustomReadSupport extends ReadSupport[CustomString] {
     println(s"read support metadata : ${readContext.getReadSupportMetadata}")
 
     new RecordMaterializer[CustomString] {
+
       class StringConverter extends PrimitiveConverter {
         var result: String = _
         override def addBinary(value: Binary): Unit = { result = value.toStringUsingUTF8 }
       }
-      val converter = new StringConverter
-      var current: CustomString = _
 
-      override def getRootConverter: GroupConverter = {
-        new GroupConverter {
-          override def getConverter(fieldIndex: Int): Converter = {
-            converter
-          }
-          override def start(): Unit = {
-            current = CustomString("") // init, just for the demo
-          }
-          override def end(): Unit = {
-          }
+      val rootConverter = new GroupConverter {
+        var current: CustomString = _
+        val converter = new StringConverter
+
+        override def getConverter(fieldIndex: Int): Converter = {
+          converter
+        }
+        override def start(): Unit = {
+          current = CustomString("") // init, just for the demo
+        }
+        override def end(): Unit = {
+        }
+        def getCurrentRecord() = {
+          current.copy(converter.result)
         }
       }
-      override def getCurrentRecord: CustomString = current.copy(converter.result)
+
+      override def getRootConverter: GroupConverter = rootConverter
+      override def getCurrentRecord: CustomString = rootConverter.getCurrentRecord()
     }
   }
 
