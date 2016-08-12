@@ -2,7 +2,7 @@ package custom
 
 import ParquetTools._
 import org.apache.hadoop.fs.Path
-import parquet.hadoop.ParquetReader
+import org.apache.parquet.hadoop.ParquetReader
 
 object CustomParquetReader extends App {
 

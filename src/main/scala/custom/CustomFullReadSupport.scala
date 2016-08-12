@@ -4,10 +4,10 @@ import java.util
 
 import CustomParquetReader.CustomString
 import org.apache.hadoop.conf.Configuration
-import parquet.hadoop.api.ReadSupport.ReadContext
-import parquet.hadoop.api.{InitContext, ReadSupport}
-import parquet.io.api._
-import parquet.schema.{MessageType, PrimitiveType, Type}
+import org.apache.parquet.hadoop.api.ReadSupport.ReadContext
+import org.apache.parquet.hadoop.api.{InitContext, ReadSupport}
+import org.apache.parquet.io.api._
+import org.apache.parquet.schema.{MessageType, Type}
 
 import scala.collection.JavaConverters._
 
@@ -19,6 +19,9 @@ class CustomFullReadSupport extends ReadSupport[CustomString] {
     //    val request = new MessageType("schema",
     //      new PrimitiveType(Repetition.OPTIONAL, PrimitiveType.PrimitiveTypeName.INT64, "ts"),
     //      new PrimitiveType(Repetition.OPTIONAL, PrimitiveType.PrimitiveTypeName.BINARY, "qs"))
+
+    //new AvroSchemaConverter(context.getConfiguration()).convert(context.getFileSchema)
+
     new ReadContext(context.getFileSchema)
   }
 

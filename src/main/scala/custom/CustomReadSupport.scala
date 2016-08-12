@@ -4,10 +4,10 @@ import java.util
 
 import CustomParquetReader.CustomString
 import org.apache.hadoop.conf.Configuration
-import parquet.hadoop.api.ReadSupport.ReadContext
-import parquet.hadoop.api.{InitContext, ReadSupport}
-import parquet.io.api._
-import parquet.schema.MessageType
+import org.apache.parquet.hadoop.api.{InitContext, ReadSupport}
+import org.apache.parquet.hadoop.api.ReadSupport.ReadContext
+import org.apache.parquet.io.api._
+import org.apache.parquet.schema.MessageType
 
 class CustomReadSupport extends ReadSupport[CustomString] {
 

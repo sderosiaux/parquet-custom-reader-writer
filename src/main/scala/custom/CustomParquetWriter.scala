@@ -1,7 +1,7 @@
 package custom
 
 import org.apache.hadoop.fs.Path
-import parquet.hadoop.ParquetWriter
+import org.apache.parquet.hadoop.ParquetWriter
 
 object CustomParquetWriter extends App {
 

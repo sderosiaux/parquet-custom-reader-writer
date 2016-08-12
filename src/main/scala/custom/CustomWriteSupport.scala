@@ -1,12 +1,12 @@
 package custom
 
-import custom.CustomParquetWriter._
 import org.apache.hadoop.conf.Configuration
-import parquet.hadoop.api.WriteSupport
-import parquet.hadoop.api.WriteSupport.WriteContext
-import parquet.io.api.{Binary, RecordConsumer}
-import parquet.schema.Type.Repetition
-import parquet.schema.{MessageType, PrimitiveType}
+import org.apache.parquet.hadoop.api.WriteSupport
+import org.apache.parquet.hadoop.api.WriteSupport.WriteContext
+import org.apache.parquet.io.api.{Binary, RecordConsumer}
+import org.apache.parquet.schema.Type.Repetition
+import org.apache.parquet.schema.{MessageType, PrimitiveType}
+
 import collection.JavaConverters._
 
 class CustomWriteSupport(metadata: Map[String, String]) extends WriteSupport[String] {
@@ -21,7 +21,7 @@ class CustomWriteSupport(metadata: Map[String, String]) extends WriteSupport[Str
   override def write(record: String): Unit = {
     consumer.startMessage()
     consumer.startField("name", 0)
-    consumer.addBinary(Binary.fromByteArray(record.getBytes()))
+    consumer.addBinary(Binary.fromReusedByteArray(record.getBytes()))
     consumer.endField("name", 0)
     consumer.endMessage()
   }

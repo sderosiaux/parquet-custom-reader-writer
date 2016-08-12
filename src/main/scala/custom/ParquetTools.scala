@@ -1,6 +1,6 @@
 package custom
 
-import parquet.hadoop.ParquetReader
+import org.apache.parquet.hadoop.ParquetReader
 
 object ParquetTools {
 
