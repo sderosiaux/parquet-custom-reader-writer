@@ -12,12 +12,12 @@ object CustomParquetReader extends App {
 
   // new ParquetReader(...) is deprecated, we must use the builder form
   def parquetReader(path: Path): ParquetReader[CustomString] = {
-    ParquetReader.builder[CustomString](new CustomFullReadSupport, path).build()
+    ParquetReader.builder[CustomString](new CustomReadSupport, path).build()
     // or we can use CustomFullReadSupport to read every fields
     //ParquetReader.builder[CustomString](new CustomFullReadSupport, path).build()
   }
 
-  val reader = parquetReader("/tmp/294d8dcbc8568cc5-7eaad9794f57b1b2_1968823972_data.0.parq")
+  val reader = parquetReader("/tmp/toto.parquet")
   parquetFileIterator(reader).take(10).foreach(println)
   reader.close()
 
